@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/jaankuu/fridge-backend/issues"
   },
-  "homepage": "https://github.com/jaankuu/fridge-backend#readme"
+  "homepage": "https://github.com/jaankuu/fridge-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.4",
+    "sequelize-cli": "^6.2.0"
+  }
 }
