@@ -1,7 +1,7 @@
 const express = require("express");
 const { PORT } = require("./config/constants");
-// const loggerMiddleWare = require("morgan");
-// const corsMiddleWare = require("cors");
+const loggerMiddleWare = require("morgan");
+const corsMiddleWare = require("cors");
 // const authRouter = require("./routers/auth");
 // const authMiddleWare = require("./auth/middleware");
 const Users = require("./models").user;
@@ -25,21 +25,21 @@ app.get("/", (req, res) => {
   });
 
   // POST endpoint which requires a token for testing purposes, can be removed
-app.post("/authorized_post_request", authMiddleWare, (req, res) => {
-    // accessing user that was added to req by the auth middleware
-    const user = req.user;
-    // don't send back the password hash
-    delete user.dataValues["password"];
+// app.post("/authorized_post_request", authMiddleWare, (req, res) => {
+//     // accessing user that was added to req by the auth middleware
+//     const user = req.user;
+//     // don't send back the password hash
+//     delete user.dataValues["password"];
   
-    res.json({
-      youPosted: {
-        ...req.body,
-      },
-      userFoundWithToken: {
-        ...user.dataValues,
-      },
-    });
-  });
+//     res.json({
+//       youPosted: {
+//         ...req.body,
+//       },
+//       userFoundWithToken: {
+//         ...user.dataValues,
+//       },
+//     });
+//   });
 
 
 // get all recipes of a user
