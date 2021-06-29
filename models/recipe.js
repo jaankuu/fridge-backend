@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       } 
     },
-    recipeId: { type: DataTypes.INTEGER, allowNull: false },
+    recipeId: { type: DataTypes.STRING, allowNull: false },
     stars: { type: DataTypes.INTEGER }
   }, {
     sequelize,

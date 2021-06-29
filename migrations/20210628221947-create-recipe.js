@@ -18,7 +18,7 @@ module.exports = {
 
       },
       recipeId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       stars: {
