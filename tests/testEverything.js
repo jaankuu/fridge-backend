@@ -32,12 +32,12 @@ async function meExample() {
 
     const postRecipe = await axios.post(`http://localhost:${PORT}/addrecipe`, {
       userId: 2,
-      recipeId: "xy"
+      recipeId: "TestRecipePost"
     });
 
     console.log("added recipe", postRecipe)
 
-    const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/7`, {
+    const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/1`, {
   });
 
     console.log(response.data);
