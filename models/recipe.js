@@ -14,7 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   recipe.init({
-    userId: { type: DataTypes.INTEGER, allowNull: false },
+    userId: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false,
+      references: {
+        model: "users",
+        key: "id"
+      } 
+    },
     recipeId: { type: DataTypes.INTEGER, allowNull: false },
     stars: { type: DataTypes.INTEGER }
   }, {
