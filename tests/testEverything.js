@@ -30,6 +30,16 @@ async function meExample() {
       }
     );
 
+    const postRecipe = await axios.post(`http://localhost:${PORT}/addrecipe`, {
+      userId: 2,
+      recipeId: "xy"
+    });
+
+    console.log("added recipe", postRecipe)
+
+    const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/7`, {
+  });
+
     console.log(response.data);
   } catch (error) {
     console.log("OH NO AN ERROR", error.message);

@@ -26,11 +26,9 @@ app.listen(PORT, () => {
   });
 
 
-  // POST endpoint which requires a token for testing purposes, can be removed
+  // ./tests TEST 
 app.post("/authorized_post_request", authMiddleWare, (req, res) => {
-    // accessing user that was added to req by the auth middleware
     const user = req.user;
-    // don't send back the password hash
     delete user.dataValues["password"];
   
     res.json({
@@ -44,7 +42,7 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
   });
 
 
-// get all recipes of a user
+// GET all recipes of a user
 
 app.get("/getrecipes", async (req, res) => {
     try {
@@ -61,13 +59,55 @@ app.get("/getrecipes", async (req, res) => {
 }),
 
 
-// get all recipes
+// GET all user profiles
 
-app.get("/recipes", async (req, res) => {
-    try {
-        const rezzz = await Recipes.findAll()
-        return res.status(200).send({ message: "ok", rezzz})
-    } catch(error) {
-        console.log(error.message)
-    }
+app.get("/profiles", async (req, res) => {
+  try {
+    const profiles = await Users.findAll({
+      attributes: ["name", "profileUrl", "id"]
+    })
+  } catch(error) {
+    console.log(error.message)
+  }
+})
+
+// ADD a recipe to profile
+
+app.post("/addrecipe", async (req, res) => {
+  try {
+    const { userId, recipeId } = req.body
+
+    console.log("body content add rec", userId, recipeId)
+
+    addRecipe = await Recipes.create({
+      userId: userId,
+      recipeId: recipeId
+    })
+
+    return res.status(201).send({ message: "Recipe added!", addRecipe})
+
+  } catch(error) {
+    console.log(error.message)
+  }
+})
+
+// DELETE a recipe from profile
+
+app.delete("/deleterecipe/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+
+    console.log("recipe ID to del", id)
+
+    const recipeToDelete = await Recipes.findByPk(id)
+
+    console.log("recipe to delete", recipeToDelete)
+     
+    await recipeToDelete.destroy();
+
+    return res.status(200).send({ message: "recipe deleted" })
+
+  } catch(error) {
+    console.log(error.message)
+  }
 })
