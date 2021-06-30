@@ -49,9 +49,11 @@ app.get("/getrecipes/:id", async (req, res) => {
         const { id } = req.params
         
         const findUser = await Users.findByPk(id)
+        const userName = findUser.name
+        const userPic = findUser.profileUrl
         const recipes = await Recipes.findAll({ where: { userId: findUser.id } })
 
-        return res.status(200).send({ message: "ok", recipes })
+        return res.status(200).send({ message: "ok", recipes, userName, userPic })
 
     } catch(error) {
         console.log(error.message)
