@@ -35,10 +35,22 @@ async function meExample() {
       recipeId: "TestRecipePost"
     });
 
-    console.log("added recipe", postRecipe)
+    // TEST for deleting a recipe from profile
 
-    const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/1`, {
-  });
+  //   console.log("added recipe", postRecipe)
+
+  //   const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/1`, {
+  // });
+
+  const getProfiles = await axios.get(`http://localhost:${PORT}/profiles`)
+
+  console.log("all profiles:", getProfiles.data)
+  
+  
+  const getRecipesOfUser = await axios.get(`http://localhost:${PORT}/getrecipes/1`)
+
+  console.log("all recipes for id 1", getRecipesOfUser.data )
+
 
     console.log(response.data);
   } catch (error) {
