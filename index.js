@@ -44,12 +44,12 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
 
 // GET all recipes of a user
 
-app.get("/getrecipes", async (req, res) => {
+app.get("/getrecipes/:id", async (req, res) => {
     try {
-        const { id } = req.body
+        const { id } = req.params
         
-        const user = await Users.findByPk(id)
-        const recipes = await Recipes.findAll({ where: { userId: user.id } })
+        const findUser = await Users.findByPk(id)
+        const recipes = await Recipes.findAll({ where: { userId: findUser.id } })
 
         return res.status(200).send({ message: "ok", recipes })
 
@@ -66,6 +66,9 @@ app.get("/profiles", async (req, res) => {
     const profiles = await Users.findAll({
       attributes: ["name", "profileUrl", "id"]
     })
+
+
+    return res.status(200).send({ message: "ok", profiles })
   } catch(error) {
     console.log(error.message)
   }
