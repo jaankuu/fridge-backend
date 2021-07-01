@@ -95,22 +95,33 @@ app.delete("/deleterecipe/:recipe", authMiddleWare, async (req, res) => {
   try {
     const { recipe } = req.params;
 
-    req.user = user;
+    const user = req.user;
+    console.log("USER: ", user)
+
     const userId = req.user.id;
+    console.log("userID", userId)
+    console.log("recipe id:", recipe)
+
 
     // console.log("recipeId to del", userId);
     // parseInt
 
-    const recipeToDelete = await Recipes.findAll({ where: {
+
+    const recipeToDelete = await Recipes.findOne({ where: {
       userId: userId,
       recipeId: recipe 
-    }});
+    }})
+
 
     console.log("recipe to delete", recipeToDelete);
 
-    const deleted = await recipeToDelete.destroy();
+    if (!recipeToDelete) {
+      console.log("loading..")
+    } else {
+      await recipeToDelete.destroy();
+    }
 
-    res.status(200).send({ deleted, message: "recipe deleted" });
+    res.status(200).send({ message: "recipe deleted" });
   } catch (error) {
     console.log(error.message);
   }
