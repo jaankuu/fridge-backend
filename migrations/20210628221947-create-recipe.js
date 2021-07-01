@@ -22,6 +22,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      recipePic: {
+         type: Sequelize.STRING 
+        },
+      recipeName: {
+        type: Sequelize.STRING 
+      },
       stars: {
         type: Sequelize.INTEGER
       },
