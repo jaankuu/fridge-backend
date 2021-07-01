@@ -32,14 +32,14 @@ async function meExample() {
 
     const postRecipe = await axios.post(`http://localhost:${PORT}/addrecipe`, {
       userId: 2,
-      recipeId: "TestRecipePost"
+      recipeId: "NEW ONE"
     });
 
     // TEST for deleting a recipe from profile
 
   //   console.log("added recipe", postRecipe)
 
-  //   const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/1`, {
+  //   const delRecipe = await axios.delete(`http://localhost:${PORT}/deleterecipe/`, {
   // });
 
   const getProfiles = await axios.get(`http://localhost:${PORT}/profiles`)
