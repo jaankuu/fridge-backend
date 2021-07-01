@@ -41,6 +41,43 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          userId: 2,
+          recipeId: "465aad6a7e3d4a1dfef70e84ec3c7f2d",
+          recipeName: "Marinated Peanut Tempeh",
+          recipePic: "https://www.edamam.com/web-img/52b/52b786f89f7de06ba21bbb65beeebcb5",
+          stars: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 2,
+          recipeId: "a142adbe035fe79bcd1c8e1973faa20c",
+          recipeName: "Steamed Jackfruit Buns",
+          recipePic: "https://www.edamam.com/web-img/1d6/1d661a64aee11b2a697069d9e86b0b95.jpg",
+          stars: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 3,
+          recipeId: "224ab1c7537a4793758eb05c9b057ed3",
+          recipeName: "Exotic Pavlova Parfait",
+          recipePic: "https://www.edamam.com/web-img/ad4/ad45e808ba33a4af2916110bedcaa00b.jpg",
+          stars: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 4,
+          recipeId: "19d54db517d363ccfdb697c2f6febee1",
+          recipeName: "Saffron Almonds",
+          recipePic: "https://www.edamam.com/web-img/cc8/cc807bb2bff693289594adb743dda43f.jpg",
+          stars: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
       ],
       {}
     );
