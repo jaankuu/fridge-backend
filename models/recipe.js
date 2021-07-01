@@ -23,6 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       } 
     },
     recipeId: { type: DataTypes.STRING, allowNull: false },
+    recipePic: { type: DataTypes.STRING },
+    recipeName: {type: DataTypes.STRING },
     stars: { type: DataTypes.INTEGER }
   }, {
     sequelize,
