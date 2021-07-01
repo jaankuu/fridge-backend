@@ -6,6 +6,7 @@ const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
 const Users = require("./models").user;
 const Recipes = require("./models").recipe;
+const { toData } = require("../auth/jwt");
 
 const app = new express()
 
@@ -98,13 +99,20 @@ app.post("/addrecipe", async (req, res) => {
 
 // DELETE a recipe from profile
 
-app.delete("/deleterecipe/:id", async (req, res) => {
+app.delete("/deleterecipe/:recipeId", auth, async (req, res) => {
   try {
-    const { id } = req.params
+    const { recipeId } = req.params
 
-    console.log("recipe ID to del", id)
+    const auth =  req.headers.authorization && req.headers.authorization.split(" ")
+    const userId = toData(auth[1]).userId
 
-    const recipeToDelete = await Recipes.findByPk(id)
+
+    console.log("recipe ID to del", userId)
+
+    const recipeToDelete = await Recipes.findAll({ where : {
+      userId: userId,
+      recipeId : recipeId
+    }})
 
     console.log("recipe to delete", recipeToDelete)
      
