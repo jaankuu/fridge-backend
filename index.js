@@ -91,24 +91,34 @@ app.post("/addrecipe", async (req, res) => {
 
 // DELETE a recipe from profile
 
-app.delete("/deleterecipe/:id", authMiddleWare, async (req, res) => {
+app.delete("/deleterecipe/:recipe", authMiddleWare, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { recipe } = req.params;
 
-    // // const { userId } = req.body;
+    const user = req.user;
+    console.log("USER: ", user)
 
-    // // req.user = user;
-    // const userId = req.user.id;
+    const userId = req.user.id;
+    console.log("userID", userId)
+    console.log("recipe id:", recipe)
 
     // console.log("recipeId to del", userId);
+    // parseInt
 
-    const recipeToDelete = await Recipes.findByPk(id);
+    const recipeToDelete = await Recipes.findOne({ where: {
+      userId: userId,
+      recipeId: recipe 
+    }})
 
     console.log("recipe to delete", recipeToDelete);
 
-    const deleted = await recipeToDelete.destroy();
+    if (!recipeToDelete) {
+      console.log("loading..")
+    } else {
+      await recipeToDelete.destroy();
+    }
 
-    res.status(200).send({ deleted, message: "recipe deleted" });
+    res.status(200).send({ message: "recipe deleted" });
   } catch (error) {
     console.log(error.message);
   }
