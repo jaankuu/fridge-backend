@@ -102,13 +102,16 @@ app.delete("/deleterecipe/:recipe", authMiddleWare, async (req, res) => {
     console.log("userID", userId)
     console.log("recipe id:", recipe)
 
+
     // console.log("recipeId to del", userId);
     // parseInt
+
 
     const recipeToDelete = await Recipes.findOne({ where: {
       userId: userId,
       recipeId: recipe 
     }})
+
 
     console.log("recipe to delete", recipeToDelete);
 
