@@ -74,13 +74,15 @@ app.get("/getrecipes/:id", async (req, res) => {
 
 app.post("/addrecipe", async (req, res) => {
   try {
-    const { userId, recipeId } = req.body;
+    const { userId, recipeId, recipeName, recipePic } = req.body;
 
     console.log("body content add rec", userId, recipeId);
 
     addRecipe = await Recipes.create({
       userId: userId,
       recipeId: recipeId,
+      recipeName: recipeName,
+      recipePic: recipePic
     });
 
     return res.status(201).send({ message: "Recipe added!", addRecipe });
