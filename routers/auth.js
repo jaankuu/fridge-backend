@@ -42,7 +42,7 @@ app.post("/login", async (req, res, next) => {
 });
 
 app.post("/signup", async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, profileUrl } = req.body;
   if (!email || !password || !name) {
     return res.status(400).send("Please provide an email, password and a name");
   }
@@ -52,6 +52,7 @@ app.post("/signup", async (req, res) => {
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
       name,
+      profileUrl,
     });
 
     delete newUser.dataValues["password"]; // don't send back the password hash
