@@ -109,6 +109,7 @@ app.delete("/deleterecipe/:recipe", authMiddleWare, async (req, res) => {
     // parseInt
 
 
+
     const recipeToDelete = await Recipes.findOne({ where: {
       userId: userId,
       recipeId: recipe 
@@ -124,6 +125,18 @@ app.delete("/deleterecipe/:recipe", authMiddleWare, async (req, res) => {
     }
 
     res.status(200).send({ message: "recipe deleted" });
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+app.patch("/ratings", authMiddleWare, async (req, res) => {
+  try {
+    const { id, stars } = req.body;
+
+    const recipe = await Recipes.findByPk(id);
+    await recipe.update({ stars });
+    return res.send(recipe);
   } catch (error) {
     console.log(error.message);
   }
