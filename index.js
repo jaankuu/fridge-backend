@@ -1,7 +1,7 @@
 const express = require("express");
 const { PORT } = require("./config/constants");
 const loggerMiddleWare = require("morgan");
-const corsMiddleWare = require("cors");
+const cors = require("cors");
 const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
 const Users = require("./models").user;
@@ -13,7 +13,8 @@ const app = new express();
 app.use(loggerMiddleWare("dev"));
 const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
-app.use(corsMiddleWare());
+
+app.use(cors());
 
 app.use("/", authRouter);
 
@@ -82,7 +83,7 @@ app.post("/addrecipe", async (req, res) => {
       userId: userId,
       recipeId: recipeId,
       recipeName: recipeName,
-      recipePic: recipePic
+      recipePic: recipePic,
     });
 
     return res.status(201).send({ message: "Recipe added!", addRecipe });
@@ -98,28 +99,26 @@ app.delete("/deleterecipe/:recipe", authMiddleWare, async (req, res) => {
     const { recipe } = req.params;
 
     const user = req.user;
-    console.log("USER: ", user)
+    console.log("USER: ", user);
 
     const userId = req.user.id;
-    console.log("userID", userId)
-    console.log("recipe id:", recipe)
-
+    console.log("userID", userId);
+    console.log("recipe id:", recipe);
 
     // console.log("recipeId to del", userId);
     // parseInt
 
-
-
-    const recipeToDelete = await Recipes.findOne({ where: {
-      userId: userId,
-      recipeId: recipe 
-    }})
-
+    const recipeToDelete = await Recipes.findOne({
+      where: {
+        userId: userId,
+        recipeId: recipe,
+      },
+    });
 
     console.log("recipe to delete", recipeToDelete);
 
     if (!recipeToDelete) {
-      console.log("loading..")
+      console.log("loading..");
     } else {
       await recipeToDelete.destroy();
     }
