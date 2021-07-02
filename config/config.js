@@ -1,8 +1,6 @@
 // config.js
 require('dotenv').config();
 
-console.log('api url', process.env.DB_URL) // just to check
-
 module.exports = {
   "development": {
     "url": process.env.DB_URL,
